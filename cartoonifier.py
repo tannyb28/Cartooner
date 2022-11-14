@@ -13,7 +13,7 @@ from tkinter import *
 from PIL import ImageTk, Image
 
 top=tk.Tk()
-top.geometry('400x400')
+top.geometry('600x600')
 top.title('Cartoonify Your Image !')
 top.configure(background='white')
 label=Label(top,background='#CDCDCD', font=('calibri',20,'bold'))
@@ -61,18 +61,11 @@ def cartoonify(ImagePath):
 
   final = cv2.bitwise_and(blurred, blurred, mask=edges)
 
-  # images=[img, edges, new_img, final]
-
-  # fig, axes = plt.subplots(2,2, figsize=(15,15), subplot_kw={'xticks':[], 'yticks':[]}, gridspec_kw=dict(hspace=0.1, wspace=0.1))
-  # for i, ax in enumerate(axes.flat):
-  #     ax.imshow(images[i], cmap='gray')
-
   final1 = Image.fromarray(final)
-  final1.thumbnail((250,250))
+  final1.thumbnail((400,400))
   final1tk = ImageTk.PhotoImage(image=final1)
   imageLabel.configure(image=final1tk)
   imageLabel.image = final1tk
-  # plt.show()
 
 upload=Button(top,text="Cartoonify an Image",command=upload,padx=10,pady=5)
 upload.configure(background='#364156', foreground='black',font=('calibri',10,'bold'))
@@ -83,41 +76,4 @@ imageLabel = tk.Label(frame, background='white')
 imageLabel.pack(side=TOP)
 
 top.mainloop()
-
-
-
-# edges = edge_mask(img, line_size, blur_value)
-
-
-
-# def cartoonify(ImagePath):
-#   # read image
-#   originalImage = cv2.imread(ImagePath)
-#   originalImage = cv2.cvtColor(originalImage, cv2.COLOR_BGR2RGB)
-
-#   # confirm image is chosen
-#   if originalImage is None:
-#     print("Can not find any image. Choose appropriate file")
-#     sys.exit()
-  
-#   ReSized1 = cv2.resize(originalImage, (960, 540))
-
-#   # convert image to grayscale
-#   grayScaleImage = cv2.cvtColor(originalImage, cv2.COLOR_BGR2GRAY)
-#   ReSized2 = cv2.resize(grayScaleImage, (960, 540))
-
-#   # smooth image with median blur
-#   smoothGrayScale = cv2.medianBlur(grayScaleImage, 5)
-#   ReSized3 = cv2.resize(smoothGrayScale, (960, 540))
-
-#   # retrieve edges of image
-#   getEdge = cv2.adaptiveThreshold(smoothGrayScale, 255, 
-#     cv2.ADAPTIVE_THRESH_MEAN_C, 
-#     cv2.THRESH_BINARY, 9, 9)
-  
-#   ReSized4 = cv2.resize(getEdge, (960, 540))
-
-#   # bilateral filter to remove noise
-
-  
 
